@@ -1,0 +1,60 @@
+<mat-card class="mat-elevation-z3">
+    <mat-card-header>
+        
+           <img mat-card-avatar src="../../../../assets/staff-svgrepo-com.svg"/>
+        
+        <mat-card-title>Worker</mat-card-title>
+        <mat-card-subtitle>List of Workers</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="right">
+            <a mat-mini-fab [routerLink]="['/worker-create']">
+                <mat-icon>add</mat-icon>
+            </a>
+        </div>
+     <mat-table [dataSource]="dataSource" matSort>
+       
+            <ng-container matColumnDef="picture">
+                <mat-header-cell *matHeaderCellDef >
+                    
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element"><img class="circle-img" src="{{picPath}}/{{element.picture}}" style="width: 40px;" /></mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="workerName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Worker Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.workerName}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="phone">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Phone</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.phone}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="payrate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Payrate</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.payrate}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="gender">
+                <mat-header-cell *matHeaderCellDef>Gender</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{getGenderName(element.gender)}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>...</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <a [routerLink]="['/worker-edit', element.workerId]"><mat-icon>edit</mat-icon></a>
+                    <button [disabled]="!element.canDelete" mat-icon-button (click)="confirmDelete(element)"><mat-icon>delete</mat-icon></button>
+                </mat-cell>
+
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+    
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 40]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+
+    </mat-card-content>
+</mat-card>
+

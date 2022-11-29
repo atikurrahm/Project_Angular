@@ -1,0 +1,66 @@
+<mat-card class="mat-elevation-z3">
+    <mat-card-header>
+        
+           <img mat-card-avatar src="../../../../assets/executed-payment-svgrepo-com.svg"/>
+        
+        <mat-card-title>Payment Details</mat-card-title>
+        <mat-card-subtitle>Works Payment</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div *ngIf="payment" class="wrap">
+            <div class="row">
+                <mat-label>Customer</mat-label>
+                <div>{{payment.customer?.customerName}}</div>
+            </div>
+            <div class="row">
+                <mat-label>Address</mat-label>
+                <div>{{payment.customer?.address}}</div>
+            </div>
+            <div class="row">
+                <mat-label>Email</mat-label>
+                <div>{{payment.customer?.email}}</div>
+            </div>
+            
+        </div>
+       <div class="wrap">
+        <h3>Worker Payment</h3>
+        <mat-table [dataSource]="dataSource" >
+            <ng-container matColumnDef="worker">
+                <mat-header-cell *matHeaderCellDef>Worker </mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.worker.workerName}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="workerName">
+                <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.workerName}}</mat-cell>
+
+            </ng-container>
+          
+            <ng-container matColumnDef="totalWorkHours">
+                <mat-header-cell *matHeaderCellDef>TotalWorkHour</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.totalWorkHour}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="payrate">
+                <mat-header-cell *matHeaderCellDef>Payrate</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.worker.payrate}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="totalPayment">
+                <mat-header-cell *matHeaderCellDef>TotalPayment</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.totalWorkHour*element.worker.payrate}}</mat-cell>
+
+            </ng-container>
+            
+            <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+    
+        </mat-table>
+       </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-flat-button [routerLink]="['/payments']">Back to list</a>
+    </mat-card-actions>
+</mat-card>
+
+
